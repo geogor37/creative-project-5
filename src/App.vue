@@ -1,31 +1,57 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div id="app" class="box">
+    <div class="container">
+      <div class="row outer">
+        <router-view/>
+      </div>
     </div>
-    <router-view/>
+    <div class="footer">
+      <a href="https://github.com/geogor37/creative-project-5" style="color: white;">Check out my repo on Github!</a>
+    </div>
   </div>
 </template>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+  html {
+    height: 100%;
+    box-sizing: border-box;
+  }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  body {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    background: #f3f3f3;
+    margin: 0;
+    height: 100%;
+  }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  .box {
+    display: flex;
+    flex-flow: column;
+    margin: 0;
+    min-height: 100%;
+    /*background-color: #B3D3D6;*/
+  }
+
+  .box .container {
+    margin: 0 auto;
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+  }
+
+  .footer {
+    width: 100%;
+    background-color: #385153;
+    padding: .5em 0;
+    text-align: center;
+  }
+
+  .outer {
+    flex: 1 1 auto;
+    display: flex;
+    margin: 20px 0;
+    height: 100%;
+  }
 </style>
