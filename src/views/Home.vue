@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-sm centered">
           <h1>My Wishlists</h1>
-          <p class="subtitle">Logged in as {{ user.name }}</p>
+          <p class="subtitle">Logged in as {{ user.name }} <a href="#" @click="logout"><i class="fas fa-sign-out-alt"></i></a></p>
         </div>
       </div>
     </div>
@@ -41,6 +41,18 @@
       user() {
         return this.$store.state.user;
       }
+    },
+    async created() {
+      await this.$store.dispatch("getUser")
+    },
+    methods: {
+      async logout() {
+        try {
+          this.error = await this.$store.dispatch("logout");
+        } catch (error) {
+          console.log(error);
+        }
+      },
     }
   }
 </script>
@@ -53,8 +65,14 @@
 
   .subtitle {
     /*font-style: italic;*/
-    margin-top: 2px;
+    margin: 0 auto;
     color: gray;
+  }
+
+  .subtitle a {
+    padding-left: 20px;
+    color: #222;
+    font-size: 1.5em;
   }
 
   .centered > * {

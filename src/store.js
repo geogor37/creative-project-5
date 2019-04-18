@@ -32,5 +32,23 @@ export default new Vuex.Store({
         return error.response.data.message;
       }
     },
+    async logout(context) {
+      try {
+        await axios.delete("/api/users");
+        context.commit('setUser', null);
+        return "";
+      } catch (error) {
+        return error.response.data.message;
+      }
+    },
+    async getUser(context) {
+      try {
+        let response = await axios.get("/api/users");
+        context.commit('setUser', response.data);
+        return "";
+      } catch (error) {
+        return "";
+      }
+    },
   }
 })
