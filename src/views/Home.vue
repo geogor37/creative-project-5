@@ -17,7 +17,7 @@
           <h4 v-show="lists.length === 0" style="font-style: italic">You have no wishlists! Add one to get started.</h4>
           <div v-for="list in lists" class="wishlist" v-bind:class="{ selected: list === selectedList }" @click="toggleSelectedList(list)">
             <p><b>{{ list.name }}</b> - {{ list.items.length }} items</p>
-            <button @click.stop="deleteList(list)">Delete</button>
+<!--            <button @click.stop="deleteList(list)">Delete</button>-->
           </div>
         </div>
       </div>
