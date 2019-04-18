@@ -53,7 +53,8 @@
       }
     },
     async created() {
-      await this.$store.dispatch("getUser")
+      await this.$store.dispatch("getUser");
+      await this.$store.dispatch("getLists");
     },
     methods: {
       async logout() {
@@ -99,10 +100,6 @@
 
   .centered > * {
     text-align: center;
-  }
-
-  .wishlists {
-    border-right: gray 2px solid;
   }
 
   .wishlist {

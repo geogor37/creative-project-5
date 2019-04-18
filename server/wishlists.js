@@ -18,9 +18,11 @@ const wishlistSchema = new mongoose.Schema({
 const Wishlist = mongoose.model('Wishlist', wishlistSchema);
 
 // Get all the wishlists that have been created.
-router.get('/', async (req, res) => {
+router.get('/', auth.verifyToken, User.verify, async (req, res) => {
   try {
-    let wishlists = await Wishlist.find();
+    let wishlists = await Wishlist.find({
+      user: req.user
+    });
     res.send(wishlists);
   } catch (error) {
     console.log(error);

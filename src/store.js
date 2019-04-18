@@ -43,6 +43,7 @@ export default new Vuex.Store({
       try {
         await axios.delete("/api/users");
         context.commit('setUser', null);
+        context.commit('setLists', []);
         return "";
       } catch (error) {
         return error.response.data.message;
@@ -55,6 +56,16 @@ export default new Vuex.Store({
         return "";
       } catch (error) {
         return "";
+      }
+    },
+    async getLists(context) {
+      console.log("Getting lists");
+      try {
+        let response = await axios.get("/api/wishlists");
+        console.log(response.data);
+        context.commit('setLists', response.data);
+      } catch (error) {
+        console.log(error);
       }
     },
     async createList(context, name) {
