@@ -2,8 +2,9 @@
   <div class="col-sm">
     <div v-if="user">
       <div class="row">
-        <div class="col-sm">
+        <div class="col-sm centered">
           <h1>My Wishlists</h1>
+          <p class="subtitle">Logged in as {{ user.name }}</p>
         </div>
       </div>
     </div>
@@ -46,7 +47,14 @@
 
 <style>
   h1 {
-    text-align: center;
+    font-weight: bold;
+    margin-bottom: 2px;
+  }
+
+  .subtitle {
+    /*font-style: italic;*/
+    margin-top: 2px;
+    color: gray;
   }
 
   .centered > * {
