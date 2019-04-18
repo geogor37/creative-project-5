@@ -5,6 +5,14 @@
         <div class="col-sm centered">
           <h1>My Wishlists</h1>
           <p class="subtitle">Logged in as {{ user.name }} <a href="#" @click="logout"><i class="fas fa-sign-out-alt"></i></a></p>
+          <div class="row">
+            <div class="col-sm">
+              <form @submit.prevent="createList">
+                <input type="text" v-model="newListName" placeholder="List Name">
+                <button type="submit">Add List</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -18,18 +26,6 @@
         </div>
       </div>
     </div>
-    <!--    <div class="row">-->
-    <!--      <form @submit.prevent="createList">-->
-    <!--        <input type="text" v-model="newListName" placeholder="List Name">-->
-    <!--        <button type="submit">Add List</button>-->
-    <!--      </form>-->
-    <!--    </div>-->
-    <!--    <br>-->
-    <!--    <h4 v-show="lists.length === 0" style="font-style: italic">You have no wishlists! Add one to get started.</h4>-->
-    <!--    <div v-for="list in lists" class="wishlist" v-bind:class="{ selected: list === selectedList }" @click="toggleSelectedList(list)">-->
-    <!--      <p><b>{{ list.name }}</b> - {{ list.items.length }} items</p>-->
-    <!--      <button @click.stop="deleteList(list)">Delete</button>-->
-    <!--    </div>-->
   </div>
 </template>
 
@@ -37,6 +33,11 @@
   export default {
     name: 'home',
     components: {},
+    data() {
+      return {
+        newListName: '',
+      }
+    },
     computed: {
       user() {
         return this.$store.state.user;
@@ -53,6 +54,9 @@
           console.log(error);
         }
       },
+      async createList() {
+        console.log(this.newListName);
+      }
     }
   }
 </script>

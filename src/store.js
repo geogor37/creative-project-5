@@ -50,5 +50,6 @@ export default new Vuex.Store({
         return "";
       }
     },
+    async createList(context, name) 
   }
 })
