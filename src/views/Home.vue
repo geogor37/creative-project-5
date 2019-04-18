@@ -55,7 +55,12 @@
         }
       },
       async createList() {
-        console.log(this.newListName);
+        try {
+          await this.$store.dispatch("createList", this.newListName);
+          this.newListName = '';
+        } catch (e) {
+          console.log(e)
+        }
       }
     }
   }

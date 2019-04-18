@@ -10,7 +10,7 @@ const wishlistSchema = new mongoose.Schema({
 const Wishlist = mongoose.model('Wishlist', wishlistSchema);
 
 // Get all the wishlists that have been created.
-router.get('/api/wishlists', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     let wishlists = await Wishlist.find();
     res.send(wishlists);
@@ -21,7 +21,8 @@ router.get('/api/wishlists', async (req, res) => {
 });
 
 // Create a new wishlist; takes a title for the list.
-router.post('/api/wishlists', async (req, res) => {
+router.post('/', async (req, res) => {
+  console.log(req.body.title);
   const wishlist = new Wishlist({
     name: req.body.title,
     items: []
@@ -35,7 +36,7 @@ router.post('/api/wishlists', async (req, res) => {
   }
 });
 
-router.put('/api/wishlists/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   let id = req.params.id;
   let newName = req.body.name;
   console.log("ID to modify: " + id);
@@ -48,7 +49,7 @@ router.put('/api/wishlists/:id', async (req, res) => {
 });
 
 // Delete the wishlist with the given ID.
-router.delete('/api/wishlists/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   let id = req.params.id;
   console.log("ID to delete: " + id);
   await Wishlist.deleteOne({

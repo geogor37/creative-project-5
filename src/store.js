@@ -7,11 +7,18 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: null,
+    lists: []
   },
   mutations: {
     setUser(state, user) {
       state.user = user;
     },
+    setLists(state, lists) {
+      state.lists = lists;
+    },
+    addList(state, list) {
+      state.lists.push(list);
+    }
   },
   actions: {
     async register(context, data) {
@@ -50,6 +57,17 @@ export default new Vuex.Store({
         return "";
       }
     },
-    async createList(context, name) 
+    async createList(context, name) {
+      try {
+        if (name.trim().length > 0) {
+          let listResponse = axios.post("/api/wishlists", {
+            title: name
+          });
+          context.commit('addList', (await listResponse).data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 })
