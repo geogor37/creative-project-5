@@ -13,6 +13,12 @@
               </form>
             </div>
           </div>
+          <br>
+          <h4 v-show="lists.length === 0" style="font-style: italic">You have no wishlists! Add one to get started.</h4>
+          <div v-for="list in lists" class="wishlist" v-bind:class="{ selected: list === selectedList }" @click="toggleSelectedList(list)">
+            <p><b>{{ list.name }}</b> - {{ list.items.length }} items</p>
+            <button @click.stop="deleteList(list)">Delete</button>
+          </div>
         </div>
       </div>
     </div>
@@ -41,6 +47,9 @@
     computed: {
       user() {
         return this.$store.state.user;
+      },
+      lists() {
+        return this.$store.state.lists;
       }
     },
     async created() {
@@ -84,7 +93,41 @@
     font-size: 1.5em;
   }
 
+  .centered {
+    margin: 0 15%;
+  }
+
   .centered > * {
     text-align: center;
+  }
+
+  .wishlists {
+    border-right: gray 2px solid;
+  }
+
+  .wishlist {
+    padding: 8px;
+    vertical-align: center;
+  }
+
+  .wishlist > * {
+    margin: auto 0;
+    display: inline-block;
+  }
+
+  .wishlist > p {
+    font-size: 20px;
+  }
+
+  .wishlist > button {
+    margin-left: 8px;
+    margin-right: 8px;
+    height: auto;
+    float: right;
+  }
+
+  .wishlist:hover {
+    cursor: pointer;
+    background-color: lightgrey;
   }
 </style>

@@ -1,8 +1,16 @@
 const mongoose = require('mongoose');
 const express = require("express");
 const router = express.Router();
+const auth = require("./auth.js");
+
+const users = require("./users.js");
+const User = users.model;
 
 const wishlistSchema = new mongoose.Schema({
+  user:{
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  },
   name: String,
   items: [{ type: String }]
 });
@@ -21,9 +29,10 @@ router.get('/', async (req, res) => {
 });
 
 // Create a new wishlist; takes a title for the list.
-router.post('/', async (req, res) => {
+router.post('/', auth.verifyToken, User.verify, async (req, res) => {
   console.log(req.body.title);
   const wishlist = new Wishlist({
+    user: req.user,
     name: req.body.title,
     items: []
   });
